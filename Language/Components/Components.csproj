@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6593C268-4FC8-41A3-B506-FA9ADD5866EF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Components</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Symbols\ISymbol.cs" />
+    <Compile Include="Symbols\AbstractSymbol.cs" />
+    <Compile Include="Symbols\Symbol.cs" />
+    <Compile Include="Expression\Rule.cs" />
+    <Compile Include="Expression\Grammer.cs" />
+    <Compile Include="Expression\Set.cs" />
+    <Compile Include="Expression\States.cs" />
+    <Compile Include="Expression\IAction.cs" />
+    <Compile Include="Expression\Stack.cs" />
+    <Compile Include="Inputs\IInput.cs" />
+    <Compile Include="Expression\Shift.cs" />
+    <Compile Include="Expression\Reduce.cs" />
+    <Compile Include="Expression\Accept.cs" />
+    <Compile Include="Expression\Go.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Symbols\" />
+    <Folder Include="Expression\" />
+    <Folder Include="Inputs\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
