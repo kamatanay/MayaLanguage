@@ -13,18 +13,20 @@ namespace Language
 		private ISymbol lastReadElement;
 		private string program;
 		private int textPosition;
+		private int lineNumber;
 		
 		public ISymbol LastReadElement{
 			get{return lastReadElement;}
 			set{lastReadElement = value;}
 		}
 		
-		public Input()
+		public Input(string programText)
 		{
 			inputs = new ArrayList();
 			position = 0;
 			textPosition = 0;
-			program="print 5+5*10;print 10;print 5*5+10;";
+			program = programText;
+			lineNumber = 1;
 		}
 		
 		public ISymbol Get(){
@@ -42,14 +44,18 @@ namespace Language
 				switch(program[textPosition]){
 					case ' ' : 	textPosition++;break;
 					case '\t':	textPosition++;break;
+					case '\n':	textPosition++; lineNumber++;break;
+					case '\r':	textPosition++;break;
 					case '+' :	inputs.Add(new Operator("+"));textPosition++;break;
 					case '*' :	inputs.Add(new Operator("*"));textPosition++;break;
 					case ';' :	inputs.Add(new Semicolon());textPosition++;break;
+					case '(' :	inputs.Add(new OpenBracket());textPosition++;break;
+					case ')' :	inputs.Add(new CloseBracket());textPosition++;break;
 					default:	string subString = program.Substring(textPosition);
 								Regex regex = new Regex("^([a-z0-9]+)");
 								Match match = regex.Match(subString);
 								if (!match.Success)
-									throw new Exception("Invalid tocken identified");
+									throw new Exception(string.Format("Error [{0}]: Invalid tocken identified",lineNumber));
 								string identifiedPart = match.Groups[1].Value.ToString();
 								textPosition += identifiedPart.Length;
 								int number;
@@ -61,9 +67,15 @@ namespace Language
 									inputs.Add(new Keyword("print"));
 									break;
 								}
-								else{
-									throw new Exception("tocken not recognized "+identifiedPart);
-								}
+								if (identifiedPart.Equals("if")){
+									inputs.Add(new Keyword("if"));
+									break;
+								}		
+								if (identifiedPart.Equals("end")){
+									inputs.Add(new Keyword("end"));
+									break;
+								}					
+								throw new Exception(string.Format("Error [{0}]: Invalid tocken identified: {1}",lineNumber,identifiedPart));
 				}
 			}
 			inputs.Add(new End());

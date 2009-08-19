@@ -59,6 +59,9 @@
     <Compile Include="Tree\TreeNodeStack.cs" />
     <Compile Include="Symbols\Semicolon.cs" />
     <Compile Include="Tree\ProgramTreeNode.cs" />
+    <Compile Include="Symbols\OpenBracket.cs" />
+    <Compile Include="Symbols\CloseBracket.cs" />
+    <Compile Include="Tree\IfTreeNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Symbols\" />
