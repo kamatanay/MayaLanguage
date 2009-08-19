@@ -6,19 +6,27 @@ namespace Components
 	public class IfTreeNode:ITreeNode
 	{
 		private ITreeNode conditionTreeNode;
-		private ITreeNode statementTreeNode;
+		private ITreeNode trueStatementTreeNode;
+		private ITreeNode falseStatementTreeNode;
 		
-		public IfTreeNode(ITreeNode statementTreeNode, ITreeNode conditionTreeNode)
+		public IfTreeNode(ITreeNode falseStatementTreeNode, ITreeNode trueStatementTreeNode, ITreeNode conditionTreeNode)
 		{
 			this.conditionTreeNode = conditionTreeNode;
-			this.statementTreeNode = statementTreeNode;
+			this.trueStatementTreeNode = trueStatementTreeNode;
+			this.falseStatementTreeNode = falseStatementTreeNode;
 		}
+		
+		public IfTreeNode(ITreeNode trueStatementTreeNode, ITreeNode conditionTreeNode):this(null,trueStatementTreeNode,conditionTreeNode)
+		{
+		}		
 		
 		public ISymbol Execute(){
 			ISymbol conditionSymbolOutput = conditionTreeNode.Execute();
 			int conditionOutput = (int)conditionSymbolOutput.Value();
 			if (conditionOutput>0)
-				return statementTreeNode.Execute();
+				return trueStatementTreeNode.Execute();
+			else if (falseStatementTreeNode != null)
+				return falseStatementTreeNode.Execute();
 			return conditionSymbolOutput;
 		}
 	}

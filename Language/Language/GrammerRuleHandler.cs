@@ -31,7 +31,8 @@ namespace Language
 						break;
 				case 2: treeNodeStack.Push(new ProgramTreeNode(treeNodeStack.Pop())); break;
 				case 1: treeNodeStack.Push(new ProgramTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop())); break;
-				case 10:treeNodeStack.Push(new IfTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop()));break;
+				case 11:treeNodeStack.Push(new IfTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop()));break;
+				case 12:treeNodeStack.Push(new IfTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop(),treeNodeStack.Pop()));break;
 			}
 		}
 		

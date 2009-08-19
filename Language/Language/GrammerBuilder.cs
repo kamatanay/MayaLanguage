@@ -48,7 +48,15 @@ namespace Language
 				AddSymbol(new NonTerminal("E")).
 				AddSymbol(new CloseBracket()).					
 				AddSymbol(new NonTerminal("Program")).
-				AddSymbol(new Keyword("end"));			
+				AddSymbol(new NonTerminal("IfOtherPart"));	
+			
+			Rule e11 = new Rule(new NonTerminal("IfOtherPart")).
+				AddSymbol(new Keyword("end"));	
+			
+			Rule e12 = new Rule(new NonTerminal("IfOtherPart")).
+				AddSymbol(new Keyword("else")).
+				AddSymbol(new NonTerminal("Program")).
+				AddSymbol(new Keyword("end"));	
 				
 			
 			Grammer grammer = new Grammer().
@@ -61,7 +69,9 @@ namespace Language
 				AddRule(e7).
 				AddRule(e8).
 				AddRule(e9).
-				AddRule(e10);
+				AddRule(e10).
+				AddRule(e11).
+				AddRule(e12);
 			return grammer;
 		}		
 	}
