@@ -10,9 +10,9 @@ namespace Language
 		private ArrayList inputs;
 		private int position;
 		private System.Collections.Stack stack;
-		private Symbol lastReadElement;
+		private ISymbol lastReadElement;
 		
-		public Symbol LastReadElement{
+		public ISymbol LastReadElement{
 			get{return lastReadElement;}
 			set{lastReadElement = value;}
 		}
@@ -20,32 +20,32 @@ namespace Language
 		public Input()
 		{
 			inputs = new ArrayList();
-			inputs.Add(new Symbol("keyword","print"));
-			inputs.Add(new Symbol("id",5));
-			inputs.Add(new Symbol("*"));
-			inputs.Add(new Symbol("id",4));
-			inputs.Add(new Symbol("+"));
-			inputs.Add(new Symbol("id",2));			
-			inputs.Add(new Symbol("$"));
+			inputs.Add(new Keyword("print"));
+			inputs.Add(new Literal(5));
+			inputs.Add(new Operator("+"));
+			inputs.Add(new Literal(4));
+			inputs.Add(new Operator("*"));
+			inputs.Add(new Literal(2));			
+			inputs.Add(new End());
 			position = 0;
 			stack = new System.Collections.Stack();
 		}
 		
-		public Symbol Get(){
-			if (((Symbol)inputs[position]).Value() != null)
-				LastReadElement = (Symbol)inputs[position];
-			return (Symbol)inputs[position];
+		public ISymbol Get(){
+			if (((ISymbol)inputs[position]).Value() != null)
+				LastReadElement = (ISymbol)inputs[position];
+			return (ISymbol)inputs[position];
 		}
 		
 		public void Next(){
 			position++;
 		}
 		
-		public Symbol PopFromStack(){
-			return (Symbol)stack.Pop();
+		public ISymbol PopFromStack(){
+			return (ISymbol)stack.Pop();
 		}
 		
-		public void PushToStack(Symbol symbol){
+		public void PushToStack(ISymbol symbol){
 			stack.Push(symbol);
 		}
 	}

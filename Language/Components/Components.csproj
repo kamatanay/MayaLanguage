@@ -34,8 +34,6 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Symbols\ISymbol.cs" />
-    <Compile Include="Symbols\AbstractSymbol.cs" />
-    <Compile Include="Symbols\Symbol.cs" />
     <Compile Include="Expression\Rule.cs" />
     <Compile Include="Expression\Grammer.cs" />
     <Compile Include="Expression\Set.cs" />
@@ -47,6 +45,12 @@
     <Compile Include="Expression\Reduce.cs" />
     <Compile Include="Expression\Accept.cs" />
     <Compile Include="Expression\Go.cs" />
+    <Compile Include="Symbols\Literal.cs" />
+    <Compile Include="Symbols\Operator.cs" />
+    <Compile Include="Symbols\NonTerminal.cs" />
+    <Compile Include="Symbols\End.cs" />
+    <Compile Include="Symbols\Keyword.cs" />
+    <Compile Include="Symbols\InitialNonTerminal.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Symbols\" />

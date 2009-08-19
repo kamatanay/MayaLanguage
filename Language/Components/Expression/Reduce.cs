@@ -28,16 +28,16 @@ namespace Components
 			
 			switch(ruleId){
 			case 5: input.PushToStack(input.LastReadElement);break;
-			case 3: input.PushToStack(new Symbol("id",(int)input.PopFromStack().Value()*(int)input.PopFromStack().Value()));
+			case 3: input.PushToStack(new Literal((int)input.PopFromStack().Value()*(int)input.PopFromStack().Value()));
 					break;
-			case 1: input.PushToStack(new Symbol("id",(int)input.PopFromStack().Value()+(int)input.PopFromStack().Value()));
+			case 1: input.PushToStack(new Literal((int)input.PopFromStack().Value()+(int)input.PopFromStack().Value()));
 					break;				
 			case 6: PrintOperation(input,input.PopFromStack());
 					break;
 			}
 		}
 		
-		private void PrintOperation(IInput input, Symbol symbol){
+		private void PrintOperation(IInput input, ISymbol symbol){
 			Console.WriteLine(symbol.Value().ToString());
 			input.PushToStack(symbol);
 		}

@@ -8,11 +8,11 @@ namespace Components
 	public class Rule
 	{	
 		private int ruleNumber;
-		private Symbol symbol;
+		private ISymbol symbol;
 		private int parsePosition;
 		private ArrayList ruleSymbols;
 		
-		public Rule(Symbol symbol)
+		public Rule(ISymbol symbol)
 		{
 			this.symbol = symbol;
 			this.parsePosition = 0;
@@ -23,11 +23,11 @@ namespace Components
 			return ruleSymbols.Count - 1;
 		}
 		
-		public Symbol GetSymbol(){
+		public ISymbol GetSymbol(){
 			return symbol;
 		}
 		
-		public bool IsRuleFor(Symbol symbol){
+		public bool IsRuleFor(ISymbol symbol){
 			return this.symbol.Equals(symbol);
 		}
 		
@@ -40,12 +40,12 @@ namespace Components
 			}
 		}
 		
-		public void AddSymbol(Symbol symbol){
+		public void AddSymbol(ISymbol symbol){
 			this.ruleSymbols.Add(symbol);
 		}
 		
-		public Symbol GetCurrentParseSymbol(){
-			return (Symbol)ruleSymbols[parsePosition];
+		public ISymbol GetCurrentParseSymbol(){
+			return (ISymbol)ruleSymbols[parsePosition];
 		}
 		
 		public void SetParsePosition(int position){
@@ -61,8 +61,8 @@ namespace Components
 			return GetCurrentParseSymbol().IsEndSymbol();
 		}
 		
-		public IEnumerable<Symbol> Symbols(){
-			foreach(Symbol ruleSymbol in this.ruleSymbols){
+		public IEnumerable<ISymbol> Symbols(){
+			foreach(ISymbol ruleSymbol in this.ruleSymbols){
 				yield return ruleSymbol;
 			}
 		}
@@ -80,7 +80,7 @@ namespace Components
 		
 		public Rule Duplicate(){
 			Rule duplicateRule = new Rule(this.symbol.Duplicate());
-			foreach(Symbol ruleSymbol in ruleSymbols){
+			foreach(ISymbol ruleSymbol in ruleSymbols){
 				duplicateRule.AddSymbol(ruleSymbol.Duplicate());
 			}
 			duplicateRule.SetParsePosition(this.parsePosition);

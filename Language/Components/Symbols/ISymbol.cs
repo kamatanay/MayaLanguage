@@ -8,5 +8,6 @@ namespace Components
 		bool IsNonTerminal();
 		bool IsEndSymbol();
 		object Value();
+		ISymbol Duplicate();
 	}
 }

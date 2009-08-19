@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Components
 {
@@ -16,13 +17,13 @@ namespace Components
 		
 		private ArrayList states;
 		private Grammer grammer;
-		private Dictionary<int,Dictionary<Symbol,IAction>> actionMap;
+		private Dictionary<int,Dictionary<ISymbol,IAction>> actionMap;
 		
 		private States(Grammer grammer)
 		{
 			states = new ArrayList();
 			this.grammer = grammer;
-			actionMap = new Dictionary<int, Dictionary<Symbol, IAction>>();
+			actionMap = new Dictionary<int, Dictionary<ISymbol, IAction>>();
 		}
 		
 		private States BuildStates(){
@@ -32,8 +33,8 @@ namespace Components
 		
 		private States BuildStates(int stateIndex){
 			Set currentSet = (Set)states[stateIndex];
-			actionMap[stateIndex] = new Dictionary<Symbol, IAction>();
-			foreach(Symbol symbol in currentSet.GetSymbolsForGoto()){
+			actionMap[stateIndex] = new Dictionary<ISymbol, IAction>();
+			foreach(ISymbol symbol in currentSet.GetSymbolsForGoto()){
 				Set gotoState = currentSet.Goto(symbol);
 				AddState(gotoState);
 				if (symbol.IsNonTerminal())
@@ -50,11 +51,11 @@ namespace Components
 			for(int index=0;index<states.Count;index++){
 				Set currentSet = (Set)states[index];
 				if (currentSet.IsFinalState){
-					actionMap[index][new Symbol("$")] = new Accept();
+					actionMap[index][new End()] = new Accept();
 				}				
 				if (currentSet.ReduceStateId<=0)
 					continue;
-				foreach(Symbol grammerSymbol in this.grammer.SymbolsInGrammer){
+				foreach(ISymbol grammerSymbol in this.grammer.SymbolsInGrammer){
 					if (!grammerSymbol.IsNonTerminal()){
 						if (!actionMap[index].ContainsKey(grammerSymbol))
 							actionMap[index][grammerSymbol] = new Reduce(currentSet.ReduceStateId,grammer,this);
@@ -72,23 +73,13 @@ namespace Components
 			return -1;
 		}
 		
-		public IAction GetAction(int stateId, Symbol symbol){
+		public IAction GetAction(int stateId, ISymbol symbol){
 			try{
 				return actionMap[stateId][symbol];
 			}
 			catch(KeyNotFoundException e){
 			 Console.WriteLine(stateId+" "+symbol.ToString());
 				return null;
-			}
-		}
-		
-		public void ShowActions(){
-			BuildMap();
-			foreach(int index in actionMap.Keys){
-				Dictionary<Symbol,IAction> ruleMap = actionMap[index];
-				foreach(Symbol symbol in ruleMap.Keys){
-					Console.WriteLine(index+" "+symbol.ToString()+" -> "+ruleMap[symbol]);
-				}
 			}
 		}
 		
@@ -108,6 +99,15 @@ namespace Components
 					return true;
 			}
 			return false;
+		}
+		
+		public override string ToString(){
+			string statesString = "";
+			for(int index=0;index<states.Count;index++){
+				statesString = statesString + index + " " + states[index].ToString().Replace("$","\n");
+				statesString = statesString + "\n\n";
+			}
+			return statesString;
 		}
 	}
 }

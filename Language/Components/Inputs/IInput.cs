@@ -5,10 +5,10 @@ namespace Components
 {
 	public interface IInput
 	{
-		Symbol Get();
+		ISymbol Get();
 		void Next();
-		Symbol LastReadElement{get;set;}
-		Symbol PopFromStack();
-		void PushToStack(Symbol symbol);
+		ISymbol LastReadElement{get;set;}
+		ISymbol PopFromStack();
+		void PushToStack(ISymbol symbol);
 	}
 }

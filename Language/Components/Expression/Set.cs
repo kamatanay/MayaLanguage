@@ -9,7 +9,7 @@ namespace Components
 	{
 		private Grammer grammer;
 		private ArrayList rules;
-		private Dictionary<Symbol,bool> symbolsForGoto;
+		private Dictionary<ISymbol,bool> symbolsForGoto;
 		private int reduceStateId;
 		private bool isFinalState;
 		
@@ -27,7 +27,7 @@ namespace Components
 		{
 			this.grammer = grammer;
 			this.rules = new ArrayList();
-			this.symbolsForGoto = new Dictionary<Symbol, bool>();
+			this.symbolsForGoto = new Dictionary<ISymbol, bool>();
 			ReduceStateId = -1;
 			IsFinalState = false;
 		}
@@ -42,13 +42,13 @@ namespace Components
 				symbolsForGoto.Add(rule.GetCurrentParseSymbol(),true);
 		}	
 		
-		public IEnumerable<Symbol> GetSymbolsForGoto(){
-			foreach(Symbol symbol in symbolsForGoto.Keys){
+		public IEnumerable<ISymbol> GetSymbolsForGoto(){
+			foreach(ISymbol symbol in symbolsForGoto.Keys){
 				yield return symbol;
 			}
 		}
 		
-		public Set Goto(Symbol symbol){
+		public Set Goto(ISymbol symbol){
 			Set newSet = new Set(this.grammer);
 			foreach(Rule rule in this.rules){
 				if (rule.GetCurrentParseSymbol().Equals(symbol)){
@@ -66,7 +66,7 @@ namespace Components
 			while(true){
 				ArrayList ruleList = new ArrayList();
 				foreach(Rule rule in newSet.rules){
-					Symbol currentParseSymbol = rule.GetCurrentParseSymbol();
+					ISymbol currentParseSymbol = rule.GetCurrentParseSymbol();
 					foreach(Rule closingRule in this.grammer.GetRulesFor(currentParseSymbol)){
 						if (!newSet.ToString().Contains(closingRule.ToString()))
 							ruleList.Add(closingRule);

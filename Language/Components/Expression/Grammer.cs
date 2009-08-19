@@ -9,12 +9,12 @@ namespace Components
 	public class Grammer
 	{
 		private ArrayList rules;
-		private Dictionary<Symbol,bool> symbolsInGrammer;
+		private Dictionary<ISymbol,bool> symbolsInGrammer;
 		
 		public Grammer()
 		{
 			rules = new ArrayList();
-			symbolsInGrammer = new Dictionary<Symbol, bool>();
+			symbolsInGrammer = new Dictionary<ISymbol, bool>();
 		}
 		
 		public Rule Get(int ruleId){
@@ -24,15 +24,15 @@ namespace Components
 		public void AddRule(Rule rule){
 			rules.Add(rule);
 			rule.RuleNumber = rules.Count;
-			foreach(Symbol symbol in rule.Symbols()){
+			foreach(ISymbol symbol in rule.Symbols()){
 				if (!symbolsInGrammer.ContainsKey(symbol))
 					symbolsInGrammer.Add(symbol,true);
 			}
 		}	
 		
-		public IEnumerable<Symbol> SymbolsInGrammer{
+		public IEnumerable<ISymbol> SymbolsInGrammer{
 			get{
-				foreach(Symbol symbol in symbolsInGrammer.Keys){
+				foreach(ISymbol symbol in symbolsInGrammer.Keys){
 					yield return symbol;
 				}
 			}
@@ -49,7 +49,7 @@ namespace Components
 			return -1;
 		}
 		
-		public IEnumerable<Rule> GetRulesFor(Symbol symbol){
+		public IEnumerable<Rule> GetRulesFor(ISymbol symbol){
 			foreach(Rule rule in this.rules){
 				if (rule.GetSymbol().Equals(symbol))
 					yield return rule.Duplicate();
@@ -57,9 +57,9 @@ namespace Components
 		}
 		
 		public Set GetInitialState(){
-			Rule initialRule = new Rule(new Symbol(((Rule)rules[0]).GetSymbol().ToString()+"_"));
-			initialRule.AddSymbol(new Symbol(((Rule)rules[0]).GetSymbol().ToString()));
-			initialRule.AddSymbol(new Symbol("$"));
+			Rule initialRule = new Rule(new InitialNonTerminal(((Rule)rules[0]).GetSymbol().ToString()));
+			initialRule.AddSymbol(((Rule)rules[0]).GetSymbol().Duplicate());
+			initialRule.AddSymbol(new End());
 			Set initialSet = new Set(this);
 			initialSet.AddRule(initialRule);
 			foreach(Rule rule in rules){
