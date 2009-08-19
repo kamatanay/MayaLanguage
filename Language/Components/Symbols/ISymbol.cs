@@ -5,7 +5,7 @@ namespace Components
 {
 	public interface ISymbol
 	{
-		bool IsTerminal();
+		bool IsNonTerminal();
 		bool IsEndSymbol();
 		object Value();
 	}

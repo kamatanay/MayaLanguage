@@ -36,7 +36,7 @@ namespace Components
 			foreach(Symbol symbol in currentSet.GetSymbolsForGoto()){
 				Set gotoState = currentSet.Goto(symbol);
 				AddState(gotoState);
-				if (symbol.IsTerminal())
+				if (symbol.IsNonTerminal())
 					actionMap[stateIndex][symbol] = new Go(GetStateIdFor(gotoState));
 				else
 					actionMap[stateIndex][symbol] = new Shift(GetStateIdFor(gotoState));
@@ -55,7 +55,7 @@ namespace Components
 				if (currentSet.ReduceStateId<=0)
 					continue;
 				foreach(Symbol grammerSymbol in this.grammer.SymbolsInGrammer){
-					if (!grammerSymbol.IsTerminal()){
+					if (!grammerSymbol.IsNonTerminal()){
 						if (!actionMap[index].ContainsKey(grammerSymbol))
 							actionMap[index][grammerSymbol] = new Reduce(currentSet.ReduceStateId,grammer,this);
 					}	

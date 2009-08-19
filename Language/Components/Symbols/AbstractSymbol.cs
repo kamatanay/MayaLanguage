@@ -20,7 +20,7 @@ namespace Components
 			return this.name.Equals("$");
 		}
 		
-		public bool IsTerminal(){
+		public bool IsNonTerminal(){
 			return this.name.StartsWith("_");
 		}
 		
