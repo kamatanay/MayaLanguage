@@ -38,9 +38,8 @@ namespace Language
 			Rule e8 = new Rule(new NonTerminal("F")).
 				AddSymbol(new Literal());
 			
-			Rule e9 = new Rule(new NonTerminal("E")).
-				AddSymbol(new Keyword("print")).
-				AddSymbol(new NonTerminal("E"));
+			Rule e9 = new Rule(new NonTerminal("F")).
+				AddSymbol(new NonTerminal("Variable"));
 			
 			Rule e10 = new Rule(new NonTerminal("Statement")).
 				AddSymbol(new Keyword("if")).
@@ -57,6 +56,27 @@ namespace Language
 				AddSymbol(new Keyword("else")).
 				AddSymbol(new NonTerminal("Program")).
 				AddSymbol(new Keyword("end"));	
+			
+			Rule e13 = new Rule(new NonTerminal("Statement")).
+				AddSymbol(new Keyword("print")).
+				AddSymbol(new NonTerminal("E")).			
+				AddSymbol(new Semicolon());
+			
+			Rule e14 = new Rule(new NonTerminal("Variable")).
+				AddSymbol(new Identifier(null));
+			
+			Rule e15 = new Rule(new NonTerminal("Statement")).
+				AddSymbol(new Keyword("var")).
+				AddSymbol(new NonTerminal("Variable")).
+				AddSymbol(new NonTerminal("IdentifierDeclaration"));
+
+			Rule e16 = new Rule(new NonTerminal("IdentifierDeclaration")).
+				AddSymbol(new Semicolon());
+			
+			Rule e17 = new Rule(new NonTerminal("IdentifierDeclaration")).
+				AddSymbol(new Operator("=")).
+				AddSymbol(new NonTerminal("E")).
+				AddSymbol(new Semicolon());
 				
 			
 			Grammer grammer = new Grammer().
@@ -71,7 +91,12 @@ namespace Language
 				AddRule(e9).
 				AddRule(e10).
 				AddRule(e11).
-				AddRule(e12);
+				AddRule(e12).
+				AddRule(e13).
+				AddRule(e14).
+				AddRule(e15).
+				AddRule(e16).
+				AddRule(e17);
 			return grammer;
 		}		
 	}

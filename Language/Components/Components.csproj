@@ -64,6 +64,9 @@
     <Compile Include="Tree\IfTreeNode.cs" />
     <Compile Include="Parser\Parser.cs" />
     <Compile Include="Expression\IGrammerRuleHandler.cs" />
+    <Compile Include="Symbols\Identifier.cs" />
+    <Compile Include="Tree\IdentifierTreeNode.cs" />
+    <Compile Include="Tree\AssignTreeNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Symbols\" />

@@ -14,6 +14,7 @@ namespace Language
 		private string program;
 		private int textPosition;
 		private int lineNumber;
+		private ArrayList keywords;
 		
 		public ISymbol LastReadElement{
 			get{return lastReadElement;}
@@ -27,6 +28,16 @@ namespace Language
 			textPosition = 0;
 			program = programText;
 			lineNumber = 1;
+			IntializeKeywords();
+		}
+		
+		private void IntializeKeywords(){
+			keywords = new ArrayList();
+			keywords.Add("print");
+			keywords.Add("if");
+			keywords.Add("else");
+			keywords.Add("end");
+			keywords.Add("var");
 		}
 		
 		public ISymbol Get(){
@@ -47,6 +58,7 @@ namespace Language
 					case '\n':	textPosition++; lineNumber++;break;
 					case '\r':	textPosition++;break;
 					case '+' :	inputs.Add(new Operator("+"));textPosition++;break;
+					case '=' : 	inputs.Add(new Operator("="));textPosition++;break;
 					case '*' :	inputs.Add(new Operator("*"));textPosition++;break;
 					case ';' :	inputs.Add(new Semicolon());textPosition++;break;
 					case '(' :	inputs.Add(new OpenBracket());textPosition++;break;
@@ -63,23 +75,14 @@ namespace Language
 									inputs.Add(new Literal(number));
 									break;
 								}
-								if (identifiedPart.Equals("print")){
-									inputs.Add(new Keyword("print"));
+								if (keywords.Contains(identifiedPart)){
+									inputs.Add(new Keyword(identifiedPart));
 									break;
 								}
-								if (identifiedPart.Equals("if")){
-									inputs.Add(new Keyword("if"));
+								else{
+									inputs.Add(new Identifier(identifiedPart));
 									break;
-								}	
-								if (identifiedPart.Equals("else")){
-									inputs.Add(new Keyword("else"));
-									break;
-								}					
-								if (identifiedPart.Equals("end")){
-									inputs.Add(new Keyword("end"));
-									break;
-								}					
-								throw new Exception(string.Format("Error [{0}]: Invalid tocken identified: {1}",lineNumber,identifiedPart));
+								}
 				}
 			}
 			inputs.Add(new End());
