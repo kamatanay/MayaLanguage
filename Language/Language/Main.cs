@@ -42,11 +42,16 @@ namespace Language
 			
 			IInput input = new Input();
 			Stack stack = new Stack();
+			
+			TreeNodeStack treeNodeStack = new TreeNodeStack();
+			
 			IAction action = states.GetAction(stack.Top(), input.Get());
 			while(!action.GetType().Equals(typeof(Accept))){
-				action.Do(input,stack);
+				action.Do(input,stack,treeNodeStack);
 				action = states.GetAction(stack.Top(),input.Get());
 			}
+			
+			treeNodeStack.Pop().Execute();
 		}
 	}
 }

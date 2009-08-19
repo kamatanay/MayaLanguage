@@ -9,7 +9,7 @@ namespace Components
 		{
 		}
 		
-		public void Do(IInput input, Stack stack){
+		public void Do(IInput input, Stack stack, TreeNodeStack treeNodeStack){
 
 		}		
 	}

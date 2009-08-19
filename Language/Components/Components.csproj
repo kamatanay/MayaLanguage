@@ -51,11 +51,18 @@
     <Compile Include="Symbols\End.cs" />
     <Compile Include="Symbols\Keyword.cs" />
     <Compile Include="Symbols\InitialNonTerminal.cs" />
+    <Compile Include="Tree\ITreeNode.cs" />
+    <Compile Include="Tree\LiteralTreeNode.cs" />
+    <Compile Include="Tree\AddTreeNode.cs" />
+    <Compile Include="Tree\MultiplyTreeNode.cs" />
+    <Compile Include="Tree\PrintTreeNode.cs" />
+    <Compile Include="Tree\TreeNodeStack.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Symbols\" />
     <Folder Include="Expression\" />
     <Folder Include="Inputs\" />
+    <Folder Include="Tree\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

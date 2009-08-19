@@ -16,7 +16,7 @@ namespace Components
 			this.states = states;
 		}
 		
-		public void Do(IInput input, Stack stack){
+		public void Do(IInput input, Stack stack, TreeNodeStack treeNodeStack){
 			Rule rule = grammer.Get(ruleId);
 			int ruleLength = rule.Length();
 			for (int index=0; index<ruleLength;index++){
@@ -24,22 +24,17 @@ namespace Components
 			}
 			int stateId = stack.Top();
 			IAction action = states.GetAction(stateId,rule.GetSymbol());
-			action.Do(input,stack);
+			action.Do(input,stack,treeNodeStack);
 			
 			switch(ruleId){
-			case 5: input.PushToStack(input.LastReadElement);break;
-			case 3: input.PushToStack(new Literal((int)input.PopFromStack().Value()*(int)input.PopFromStack().Value()));
+			case 5: treeNodeStack.Push(new LiteralTreeNode(input.LastReadElement));break;
+			case 3: treeNodeStack.Push(new MultiplyTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop()));
 					break;
-			case 1: input.PushToStack(new Literal((int)input.PopFromStack().Value()+(int)input.PopFromStack().Value()));
+			case 1: treeNodeStack.Push(new AddTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop()));
 					break;				
-			case 6: PrintOperation(input,input.PopFromStack());
+			case 6: treeNodeStack.Push(new PrintTreeNode(treeNodeStack.Pop()));
 					break;
 			}
-		}
-		
-		private void PrintOperation(IInput input, ISymbol symbol){
-			Console.WriteLine(symbol.Value().ToString());
-			input.PushToStack(symbol);
 		}
 	}
 }

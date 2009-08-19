@@ -12,7 +12,7 @@ namespace Components
 			this.stateId = stateId;
 		}
 		
-		public void Do(IInput input, Stack stack){
+		public void Do(IInput input, Stack stack, TreeNodeStack treeNodeStack){
 			input.Next();
 			stack.Push(stateId);
 		}
