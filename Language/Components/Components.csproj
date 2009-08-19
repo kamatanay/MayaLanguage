@@ -57,6 +57,8 @@
     <Compile Include="Tree\MultiplyTreeNode.cs" />
     <Compile Include="Tree\PrintTreeNode.cs" />
     <Compile Include="Tree\TreeNodeStack.cs" />
+    <Compile Include="Symbols\Semicolon.cs" />
+    <Compile Include="Tree\ProgramTreeNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Symbols\" />

@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using Components;
+using System.Text.RegularExpressions;
 
 namespace Language
 {
@@ -9,8 +10,9 @@ namespace Language
 	{
 		private ArrayList inputs;
 		private int position;
-		private System.Collections.Stack stack;
 		private ISymbol lastReadElement;
+		private string program;
+		private int textPosition;
 		
 		public ISymbol LastReadElement{
 			get{return lastReadElement;}
@@ -20,15 +22,9 @@ namespace Language
 		public Input()
 		{
 			inputs = new ArrayList();
-			inputs.Add(new Keyword("print"));
-			inputs.Add(new Literal(5));
-			inputs.Add(new Operator("+"));
-			inputs.Add(new Literal(4));
-			inputs.Add(new Operator("*"));
-			inputs.Add(new Literal(2));			
-			inputs.Add(new End());
 			position = 0;
-			stack = new System.Collections.Stack();
+			textPosition = 0;
+			program="print 5+5*10;print 10;print 5*5+10;";
 		}
 		
 		public ISymbol Get(){
@@ -41,12 +37,36 @@ namespace Language
 			position++;
 		}
 		
-		public ISymbol PopFromStack(){
-			return (ISymbol)stack.Pop();
-		}
-		
-		public void PushToStack(ISymbol symbol){
-			stack.Push(symbol);
+		public void Parse(){
+			while(textPosition != program.Length){	
+				switch(program[textPosition]){
+					case ' ' : 	textPosition++;break;
+					case '\t':	textPosition++;break;
+					case '+' :	inputs.Add(new Operator("+"));textPosition++;break;
+					case '*' :	inputs.Add(new Operator("*"));textPosition++;break;
+					case ';' :	inputs.Add(new Semicolon());textPosition++;break;
+					default:	string subString = program.Substring(textPosition);
+								Regex regex = new Regex("^([a-z0-9]+)");
+								Match match = regex.Match(subString);
+								if (!match.Success)
+									throw new Exception("Invalid tocken identified");
+								string identifiedPart = match.Groups[1].Value.ToString();
+								textPosition += identifiedPart.Length;
+								int number;
+								if (int.TryParse(identifiedPart,out number)){
+									inputs.Add(new Literal(number));
+									break;
+								}
+								if (identifiedPart.Equals("print")){
+									inputs.Add(new Keyword("print"));
+									break;
+								}
+								else{
+									throw new Exception("tocken not recognized "+identifiedPart);
+								}
+				}
+			}
+			inputs.Add(new End());
 		}
 	}
 }

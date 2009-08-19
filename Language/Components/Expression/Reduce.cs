@@ -27,13 +27,15 @@ namespace Components
 			action.Do(input,stack,treeNodeStack);
 			
 			switch(ruleId){
-			case 5: treeNodeStack.Push(new LiteralTreeNode(input.LastReadElement));break;
-			case 3: treeNodeStack.Push(new MultiplyTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop()));
+			case 8: treeNodeStack.Push(new LiteralTreeNode(input.LastReadElement));break;
+			case 6: treeNodeStack.Push(new MultiplyTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop()));
 					break;
-			case 1: treeNodeStack.Push(new AddTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop()));
+			case 4: treeNodeStack.Push(new AddTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop()));
 					break;				
-			case 6: treeNodeStack.Push(new PrintTreeNode(treeNodeStack.Pop()));
+			case 9: treeNodeStack.Push(new PrintTreeNode(treeNodeStack.Pop()));
 					break;
+			case 2: treeNodeStack.Push(new ProgramTreeNode(treeNodeStack.Pop())); break;
+			case 1: treeNodeStack.Push(new ProgramTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop())); break;				
 			}
 		}
 	}

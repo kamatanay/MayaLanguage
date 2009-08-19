@@ -8,7 +8,6 @@ namespace Components
 		ISymbol Get();
 		void Next();
 		ISymbol LastReadElement{get;set;}
-		ISymbol PopFromStack();
-		void PushToStack(ISymbol symbol);
+		void Parse();
 	}
 }
