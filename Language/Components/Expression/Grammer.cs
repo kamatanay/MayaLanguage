@@ -21,13 +21,14 @@ namespace Components
 			return (Rule)rules[ruleId-1];
 		}
 		
-		public void AddRule(Rule rule){
+		public Grammer AddRule(Rule rule){
 			rules.Add(rule);
 			rule.RuleNumber = rules.Count;
 			foreach(ISymbol symbol in rule.Symbols()){
 				if (!symbolsInGrammer.ContainsKey(symbol))
 					symbolsInGrammer.Add(symbol,true);
 			}
+			return this;
 		}	
 		
 		public IEnumerable<ISymbol> SymbolsInGrammer{
@@ -59,7 +60,6 @@ namespace Components
 		public Set GetInitialState(){
 			Rule initialRule = new Rule(new InitialNonTerminal(((Rule)rules[0]).GetSymbol().ToString()));
 			initialRule.AddSymbol(((Rule)rules[0]).GetSymbol().Duplicate());
-			initialRule.AddSymbol(new End());
 			Set initialSet = new Set(this);
 			initialSet.AddRule(initialRule);
 			foreach(Rule rule in rules){

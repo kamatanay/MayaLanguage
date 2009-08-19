@@ -12,11 +12,14 @@ namespace Components
 		private int parsePosition;
 		private ArrayList ruleSymbols;
 		
+		private static ISymbol END = new End();
+		
 		public Rule(ISymbol symbol)
 		{
 			this.symbol = symbol;
 			this.parsePosition = 0;
 			this.ruleSymbols = new ArrayList();
+			this.ruleSymbols.Add(END);
 		}
 		
 		public int Length(){
@@ -40,8 +43,11 @@ namespace Components
 			}
 		}
 		
-		public void AddSymbol(ISymbol symbol){
+		public Rule AddSymbol(ISymbol symbol){
+			this.ruleSymbols.Remove(END);
 			this.ruleSymbols.Add(symbol);
+			this.ruleSymbols.Add(END);
+			return this;
 		}
 		
 		public ISymbol GetCurrentParseSymbol(){
@@ -81,6 +87,8 @@ namespace Components
 		public Rule Duplicate(){
 			Rule duplicateRule = new Rule(this.symbol.Duplicate());
 			foreach(ISymbol ruleSymbol in ruleSymbols){
+				if (ruleSymbol.IsEndSymbol())
+					continue;		
 				duplicateRule.AddSymbol(ruleSymbol.Duplicate());
 			}
 			duplicateRule.SetParsePosition(this.parsePosition);

@@ -7,42 +7,36 @@ namespace Language
 	{
 		public static void Main(string[] args)
 		{
-			Rule e1 = new Rule(new NonTerminal("E"));
-			e1.AddSymbol(new NonTerminal("E"));
-			e1.AddSymbol(new Operator("+"));
-			e1.AddSymbol(new NonTerminal("T"));
-			e1.AddSymbol(new End());
+			Rule e1 = new Rule(new NonTerminal("E")).
+				AddSymbol(new NonTerminal("E")).
+				AddSymbol(new Operator("+")).
+				AddSymbol(new NonTerminal("T"));
 			
-			Rule e2 = new Rule(new NonTerminal("E"));
-			e2.AddSymbol(new NonTerminal("T"));
-			e2.AddSymbol(new End());		
+			Rule e2 = new Rule(new NonTerminal("E")).
+				AddSymbol(new NonTerminal("T"));
 			
-			Rule e3 = new Rule(new NonTerminal("T"));
-			e3.AddSymbol(new NonTerminal("T"));
-			e3.AddSymbol(new Operator("*"));
-			e3.AddSymbol(new NonTerminal("F"));
-			e3.AddSymbol(new End());		
+			Rule e3 = new Rule(new NonTerminal("T")).
+				AddSymbol(new NonTerminal("T")).
+				AddSymbol(new Operator("*")).
+				AddSymbol(new NonTerminal("F"));
 			
-			Rule e4 = new Rule(new NonTerminal("T"));
-			e4.AddSymbol(new NonTerminal("F"));
-			e4.AddSymbol(new End());				
+			Rule e4 = new Rule(new NonTerminal("T")).
+				AddSymbol(new NonTerminal("F"));
 			
-			Rule e5 = new Rule(new NonTerminal("F"));
-			e5.AddSymbol(new Literal());
-			e5.AddSymbol(new End());		
+			Rule e5 = new Rule(new NonTerminal("F")).
+				AddSymbol(new Literal());
 			
-			Rule e6 = new Rule(new NonTerminal("E"));
-			e6.AddSymbol(new Keyword("print"));
-			e6.AddSymbol(new NonTerminal("E"));
-			e6.AddSymbol(new End());			
+			Rule e6 = new Rule(new NonTerminal("E")).
+				AddSymbol(new Keyword("print")).
+				AddSymbol(new NonTerminal("E"));
 			
-			Grammer grammer = new Grammer();
-			grammer.AddRule(e1);
-			grammer.AddRule(e2);
-			grammer.AddRule(e3);
-			grammer.AddRule(e4);
-			grammer.AddRule(e5);
-			grammer.AddRule(e6);
+			Grammer grammer = new Grammer().
+				AddRule(e1).
+				AddRule(e2).
+				AddRule(e3).
+				AddRule(e4).
+				AddRule(e5).
+				AddRule(e6);
 			
 			States states = States.BuildStates(grammer);
 			
