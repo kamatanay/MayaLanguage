@@ -70,7 +70,11 @@ namespace Language
 								if (identifiedPart.Equals("if")){
 									inputs.Add(new Keyword("if"));
 									break;
-								}		
+								}	
+								if (identifiedPart.Equals("else")){
+									inputs.Add(new Keyword("else"));
+									break;
+								}					
 								if (identifiedPart.Equals("end")){
 									inputs.Add(new Keyword("end"));
 									break;

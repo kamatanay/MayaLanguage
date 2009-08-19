@@ -62,12 +62,15 @@
     <Compile Include="Symbols\OpenBracket.cs" />
     <Compile Include="Symbols\CloseBracket.cs" />
     <Compile Include="Tree\IfTreeNode.cs" />
+    <Compile Include="Parser\Parser.cs" />
+    <Compile Include="Expression\IGrammerRuleHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Symbols\" />
     <Folder Include="Expression\" />
     <Folder Include="Inputs\" />
     <Folder Include="Tree\" />
+    <Folder Include="Parser\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

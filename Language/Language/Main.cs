@@ -17,9 +17,12 @@ namespace Language
 			
 			string programInput = File.ReadAllText(args[0]);
 			
+			GrammerBuilder grammerBuilder = new GrammerBuilder();
+			Grammer grammer = grammerBuilder.GetGrammer();
 			IInput input = new Input(programInput);
 			Parser parser = new Parser();
-			ITreeNode rootNode = parser.Parse(input);
+			IGrammerRuleHandler ruleHandler = new GrammerRuleHandler(input);
+			ITreeNode rootNode = parser.Parse(grammer,input,ruleHandler);
 			rootNode.Execute();
 		}
 	}

@@ -33,7 +33,8 @@
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Input.cs" />
-    <Compile Include="Parser.cs" />
+    <Compile Include="GrammerBuilder.cs" />
+    <Compile Include="GrammerRuleHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

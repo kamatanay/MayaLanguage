@@ -9,7 +9,7 @@ namespace Components
 		{
 		}
 		
-		public void Do(IInput input, Stack stack, TreeNodeStack treeNodeStack){
+		public void Do(IInput input, Stack stack, IGrammerRuleHandler ruleHandler){
 
 		}		
 	}

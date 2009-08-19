@@ -4,32 +4,9 @@ using Components;
 
 namespace Language
 {
-	public class Parser
+	public class GrammerBuilder
 	{
-		
-		public ITreeNode Parse(IInput input){
-			
-			Grammer grammer = GetGrammer();
-			
-			States states = States.BuildStates(grammer);
-			
-			input.Parse();
-			
-			Stack stack = new Stack();
-			
-			TreeNodeStack treeNodeStack = new TreeNodeStack();
-			
-			IAction action = states.GetAction(stack.Top(), input.Get());
-			while(!action.GetType().Equals(typeof(Accept))){
-				action.Do(input,stack,treeNodeStack);
-				action = states.GetAction(stack.Top(),input.Get());
-			}
-			
-			return treeNodeStack.Pop();
-		}
-		
-		
-		private Grammer GetGrammer()
+		public Grammer GetGrammer()
 		{
 			Rule e1 = new Rule(new NonTerminal("Program")).
 				AddSymbol(new NonTerminal("Program")).
@@ -72,6 +49,7 @@ namespace Language
 				AddSymbol(new CloseBracket()).					
 				AddSymbol(new NonTerminal("Program")).
 				AddSymbol(new Keyword("end"));			
+				
 			
 			Grammer grammer = new Grammer().
 				AddRule(e1).
@@ -85,6 +63,6 @@ namespace Language
 				AddRule(e9).
 				AddRule(e10);
 			return grammer;
-		}
+		}		
 	}
 }
