@@ -7,19 +7,18 @@ namespace Components
 	public class AssignTreeNode:ITreeNode
 	{		
 		private ITreeNode valueTreeNode; 
-		private IdentifierTreeNode identifierTreeNode;
-		private Dictionary<string,object> identifierMap;
-		public AssignTreeNode(ITreeNode valueTreeNode, ITreeNode identifierTreeNode, Dictionary<string,object> identifierMap)
+		private ITreeNode identifierTreeNode;
+		public AssignTreeNode(ITreeNode valueTreeNode, ITreeNode identifierTreeNode)
 		{
 			this.valueTreeNode = valueTreeNode;
-			this.identifierTreeNode = identifierTreeNode as IdentifierTreeNode;
-			this.identifierMap = identifierMap;
+			this.identifierTreeNode = identifierTreeNode;
 		}
 		
 		public ISymbol Execute(){
 			string variableName = identifierTreeNode.Execute().Value().ToString();
-			identifierMap[variableName] = valueTreeNode.Execute();
-			return identifierMap[variableName] as ISymbol;
+			ISymbol symbol = valueTreeNode.Execute();
+			ContextProvider.GetContext().SetValueOf(variableName,symbol);
+			return symbol;
 		}
 	}
 }

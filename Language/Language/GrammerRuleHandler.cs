@@ -10,6 +10,7 @@ namespace Language
 		private IInput input;
 		private TreeNodeStack treeNodeStack;
 		private Dictionary<string,object> identifierMap;
+		private Context context;
 		
 		public TreeNodeStack TreeNodeStack{
 			set{
@@ -21,6 +22,7 @@ namespace Language
 		{
 			this.input = input;
 			this.identifierMap = new Dictionary<string, object>();
+			ContextProvider.GetContext().SetContexts(identifierMap);
 		}
 		
 		public void HandleRule(int ruleId){
@@ -36,11 +38,13 @@ namespace Language
 				case 1: treeNodeStack.Push(new ProgramTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop())); break;
 				case 11:treeNodeStack.Push(new IfTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop()));break;
 				case 12:treeNodeStack.Push(new IfTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop(),treeNodeStack.Pop()));break;
+				case 20: treeNodeStack.Push(new IdentifierTreeNode(input.LastReadElement));break;
 				case 14: treeNodeStack.Push(new IdentifierTreeNode(input.LastReadElement));break;
 				case 18: treeNodeStack.Push(new IdentifierTreeNode(input.LastReadElement));break;
 				case 16: treeNodeStack.Push(new LiteralTreeNode(new Literal(null)));break;
-				case 15: treeNodeStack.Push(new AssignTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop(),identifierMap));break;
-				case 9: treeNodeStack.Push(new VariableTreeNode(treeNodeStack.Pop(),identifierMap));break;
+				case 19: treeNodeStack.Push(new AssignTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop()));break;
+				case 15: treeNodeStack.Push(new AssignTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop()));break;
+				case 9: treeNodeStack.Push(new VariableTreeNode(treeNodeStack.Pop()));break;
 			}
 		}
 		

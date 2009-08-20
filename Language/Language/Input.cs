@@ -64,7 +64,7 @@ namespace Language
 					case '(' :	inputs.Add(new OpenBracket());textPosition++;break;
 					case ')' :	inputs.Add(new CloseBracket());textPosition++;break;
 					default:	string subString = program.Substring(textPosition);
-								Regex regex = new Regex("^([a-z0-9]+)");
+								Regex regex = new Regex("^([a-zA-Z0-9]+)");
 								Match match = regex.Match(subString);
 								if (!match.Success)
 									throw new Exception(string.Format("Error [{0}]: Invalid tocken identified",lineNumber));

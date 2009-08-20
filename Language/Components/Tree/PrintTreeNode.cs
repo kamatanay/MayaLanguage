@@ -13,8 +13,11 @@ namespace Components
 		}
 		
 		public ISymbol Execute(){
-			Console.WriteLine(valueNode.Execute().Value().ToString());
-			return valueNode.Execute();
+			ISymbol valueSymbol = valueNode.Execute();
+			if (valueSymbol.GetType().Equals(typeof(Identifier)))
+			    valueSymbol = (ISymbol)ContextProvider.GetContext().GetValueOf(valueSymbol.Value().ToString());			
+			Console.WriteLine(valueSymbol.Value().ToString());
+			return valueSymbol;
 		}	
 	}
 }

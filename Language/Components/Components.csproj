@@ -68,6 +68,8 @@
     <Compile Include="Tree\IdentifierTreeNode.cs" />
     <Compile Include="Tree\AssignTreeNode.cs" />
     <Compile Include="Tree\VariableTreeNode.cs" />
+    <Compile Include="Tree\Context.cs" />
+    <Compile Include="Tree\ContextProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Symbols\" />

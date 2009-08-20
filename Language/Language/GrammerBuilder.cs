@@ -81,6 +81,15 @@ namespace Language
 				AddSymbol(new Keyword("var")).
 				AddSymbol(new Identifier(null));
 			
+			Rule e19 = new Rule(new NonTerminal("Statement")).
+				AddSymbol(new NonTerminal("VariableAssign")).
+				AddSymbol(new NonTerminal("E")).
+				AddSymbol(new Semicolon());
+			
+			Rule e20 = new Rule(new NonTerminal("VariableAssign")).
+				AddSymbol(new Identifier(null)).
+				AddSymbol(new Operator("="));			
+			
 			Grammer grammer = new Grammer().
 				AddRule(e1).
 				AddRule(e2).
@@ -99,7 +108,9 @@ namespace Language
 				AddRule(e15).
 				AddRule(e16).
 				AddRule(e17).
-				AddRule(e18);
+				AddRule(e18).
+				AddRule(e19).
+				AddRule(e20);
 			
 			return grammer;
 		}		

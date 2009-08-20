@@ -15,8 +15,14 @@ namespace Components
 		}
 		
 		public ISymbol Execute(){
-			int x = (int)leftTreeNode.Execute().Value();	
-			int y = (int)rightTreeNode.Execute().Value();
+			ISymbol xSymbol = leftTreeNode.Execute();
+			ISymbol ySymbol = rightTreeNode.Execute();
+			if (xSymbol.GetType().Equals(typeof(Identifier)))
+			    xSymbol = (ISymbol)ContextProvider.GetContext().GetValueOf(xSymbol.Value().ToString());
+			if (ySymbol.GetType().Equals(typeof(Identifier)))
+			    ySymbol = (ISymbol)ContextProvider.GetContext().GetValueOf(ySymbol.Value().ToString());			
+			int x = (int)xSymbol.Value();	
+			int y = (int)ySymbol.Value();
 			return new Literal(x+y);
 		}
 	}
