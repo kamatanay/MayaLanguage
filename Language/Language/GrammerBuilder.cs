@@ -92,7 +92,7 @@ namespace Language
 			Rule e21 = new Rule(new NonTerminal("FunctionDefinition")).
 				AddSymbol(new Keyword("function")).
 				AddSymbol(new OpenBracket()).
-				AddSymbol(new CloseBracket()).
+				AddSymbol(new NonTerminal("ParameterList")).
 				AddSymbol(new NonTerminal("Program")).
 				AddSymbol(new Keyword("end"));
 			
@@ -102,10 +102,56 @@ namespace Language
 			Rule e23 = new Rule(new NonTerminal("FunctionCall")).
 			   	AddSymbol(new NonTerminal("Variable")).                 	
 			    AddSymbol(new OpenBracket()).
-				AddSymbol(new CloseBracket());
+				AddSymbol(new NonTerminal("ParameterValueList"));
 			
 			Rule e24 = new Rule(new NonTerminal("F")).
 				AddSymbol(new NonTerminal("FunctionCall"));
+			
+			Rule e25 = new Rule(new NonTerminal("ParameterList")).
+				AddSymbol(new NonTerminal("ParameterListElements")).
+				AddSymbol(new CloseBracket());
+			
+			Rule e26 = new Rule(new NonTerminal("ParameterList")).
+				AddSymbol(new CloseBracket());			
+			
+			Rule e27 = new Rule(new NonTerminal("SecondParameterListElements")).
+				AddSymbol(new NonTerminal("Variable"));
+
+			Rule e28 = new Rule(new NonTerminal("ParameterListElements")).
+				AddSymbol(new NonTerminal("ParameterListElements")).
+				AddSymbol(new Comma()).
+				AddSymbol(new NonTerminal("SecondParameterListElements"));	
+			
+			Rule e29 = new Rule(new NonTerminal("ParameterListElements")).
+				AddSymbol(new NonTerminal("SecondParameterListElements"));				
+			
+			
+			Rule e30 = new Rule(new NonTerminal("ParameterValueList")).
+				AddSymbol(new NonTerminal("ParameterListValueElements")).
+				AddSymbol(new CloseBracket());
+			
+			Rule e31 = new Rule(new NonTerminal("ParameterValueList")).
+				AddSymbol(new CloseBracket());			
+			
+			Rule e32 = new Rule(new NonTerminal("SecondParameterListValueElements")).
+				AddSymbol(new NonTerminal("E"));
+
+			Rule e33 = new Rule(new NonTerminal("ParameterListValueElements")).
+				AddSymbol(new NonTerminal("ParameterListValueElements")).
+				AddSymbol(new Comma()).
+				AddSymbol(new NonTerminal("SecondParameterListValueElements"));	
+			
+			Rule e34 = new Rule(new NonTerminal("ParameterListValueElements")).
+				AddSymbol(new NonTerminal("SecondParameterListValueElements"));				
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			Grammer grammer = new Grammer().
 				AddRule(e1).
@@ -131,7 +177,17 @@ namespace Language
 				AddRule(e21).
 				AddRule(e22).
 				AddRule(e23).
-				AddRule(e24);
+				AddRule(e24).
+				AddRule(e25).
+				AddRule(e26).
+				AddRule(e27).
+				AddRule(e28).
+				AddRule(e29).
+				AddRule(e30).
+				AddRule(e31).
+				AddRule(e32).
+				AddRule(e33).
+				AddRule(e34);
 			
 			return grammer;
 		}		

@@ -58,6 +58,7 @@ namespace Language
 					case '\t':	textPosition++;break;
 					case '\n':	textPosition++; lineNumber++;break;
 					case '\r':	textPosition++;break;
+					case ',' :	inputs.Add(new Comma());textPosition++;break;
 					case '+' :	inputs.Add(new Operator("+"));textPosition++;break;
 					case '=' : 	inputs.Add(new Operator("="));textPosition++;break;
 					case '*' :	inputs.Add(new Operator("*"));textPosition++;break;

@@ -47,7 +47,14 @@ namespace Language
 				case 15: treeNodeStack.Push(new AssignTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop()));break;
 				case 9: treeNodeStack.Push(new VariableTreeNode(treeNodeStack.Pop()));break;
 				case 22: treeNodeStack.Push(new FunctionDefinitionTreeNode(treeNodeStack.Pop(),++functionsIdentified));break;
-				case 23: treeNodeStack.Push(new FunctionCallTreeNode(treeNodeStack.Pop()));break;
+				case 23: treeNodeStack.Push(new FunctionCallTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop()));break;
+				case 21: treeNodeStack.Push(new FunctionTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop()));break;
+				case 26: treeNodeStack.Push(new ParameterListTreeNode(null));break;
+				case 27: treeNodeStack.Push(new ParameterListElementsTreeNode(null,treeNodeStack.Pop()));break;
+				case 28: treeNodeStack.Push(new ParameterListElementsTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop()));break;
+				case 31: treeNodeStack.Push(new ParameterValueListTreeNode(null));break;
+				case 32: treeNodeStack.Push(new ParameterValuesListElementsTreeNode(null,treeNodeStack.Pop()));break;
+				case 33: treeNodeStack.Push(new ParameterValuesListElementsTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop()));break;
 			}
 		}
 		

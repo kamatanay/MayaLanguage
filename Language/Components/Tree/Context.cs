@@ -8,10 +8,14 @@ namespace Components
 	public class Context
 	{
 		private ArrayList contexts;
+		private IDictionary<int, string> parameterVariableNames;
+		private IDictionary<int, object> parameterValues;
 			
 		public Context()
 		{
 			contexts = new ArrayList();
+			parameterVariableNames = new Dictionary<int,string>();
+			parameterValues = new Dictionary<int, object>();
 		}
 		
 		public void SetContexts(params Dictionary<string,object>[] contextObjects){
@@ -42,5 +46,22 @@ namespace Components
 			if (this.contexts.Count>1)
 				this.contexts.RemoveAt(this.contexts.Count-1);
 		}		
+		
+		public void AddParameterName(string parameterName){
+			parameterVariableNames[parameterVariableNames.Keys.Count] = parameterName;
+		}
+		
+		public void AddParameterValue(object parameterValue){
+			parameterValues[parameterValues.Keys.Count] = parameterValue;
+		}		
+		
+		public void CopyToVariableTable(){
+			int countOfVariables = parameterVariableNames.Keys.Count;
+			for (int index=0;index < countOfVariables;index++){
+				((Dictionary<string,object>)this.contexts[this.contexts.Count-1])[parameterVariableNames[index]] = parameterValues[index];
+			}
+			parameterVariableNames.Clear();
+			parameterValues.Clear();	
+		}
 	}
 }

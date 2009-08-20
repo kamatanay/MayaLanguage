@@ -74,6 +74,11 @@
     <Compile Include="Symbols\FunctionIdentifier.cs" />
     <Compile Include="Tree\FunctionDefinitionTreeNode.cs" />
     <Compile Include="Tree\FunctionCallTreeNode.cs" />
+    <Compile Include="Tree\ParameterListTreeNode.cs" />
+    <Compile Include="Tree\FunctionTreeNode.cs" />
+    <Compile Include="Tree\ParameterListElementsTreeNode.cs" />
+    <Compile Include="Tree\ParameterValueListTreeNode.cs" />
+    <Compile Include="Tree\ParameterValuesListElementsTreeNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Symbols\" />
