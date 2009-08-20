@@ -17,7 +17,7 @@ namespace Components
 		}
 		
 		public ISymbol Execute(){
-			string variableName = identifierTreeNode.IdentifierName.Value().ToString();
+			string variableName = identifierTreeNode.Execute().Value().ToString();
 			identifierMap[variableName] = valueTreeNode.Execute();
 			return identifierMap[variableName] as ISymbol;
 		}

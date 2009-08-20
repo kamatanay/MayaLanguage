@@ -66,18 +66,20 @@ namespace Language
 				AddSymbol(new Identifier(null));
 			
 			Rule e15 = new Rule(new NonTerminal("Statement")).
-				AddSymbol(new Keyword("var")).
-				AddSymbol(new NonTerminal("Variable")).
-				AddSymbol(new NonTerminal("IdentifierDeclaration"));
+				AddSymbol(new NonTerminal("VariableDeclare")).
+				AddSymbol(new NonTerminal("VariableInitialize"));
 
-			Rule e16 = new Rule(new NonTerminal("IdentifierDeclaration")).
+			Rule e16 = new Rule(new NonTerminal("VariableInitialize")).
 				AddSymbol(new Semicolon());
 			
-			Rule e17 = new Rule(new NonTerminal("IdentifierDeclaration")).
+			Rule e17 = new Rule(new NonTerminal("VariableInitialize")).
 				AddSymbol(new Operator("=")).
 				AddSymbol(new NonTerminal("E")).
 				AddSymbol(new Semicolon());
 				
+			Rule e18 = new Rule(new NonTerminal("VariableDeclare")).
+				AddSymbol(new Keyword("var")).
+				AddSymbol(new Identifier(null));
 			
 			Grammer grammer = new Grammer().
 				AddRule(e1).
@@ -96,7 +98,9 @@ namespace Language
 				AddRule(e14).
 				AddRule(e15).
 				AddRule(e16).
-				AddRule(e17);
+				AddRule(e17).
+				AddRule(e18);
+			
 			return grammer;
 		}		
 	}

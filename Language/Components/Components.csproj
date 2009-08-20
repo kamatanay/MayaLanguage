@@ -67,6 +67,7 @@
     <Compile Include="Symbols\Identifier.cs" />
     <Compile Include="Tree\IdentifierTreeNode.cs" />
     <Compile Include="Tree\AssignTreeNode.cs" />
+    <Compile Include="Tree\VariableTreeNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Symbols\" />
