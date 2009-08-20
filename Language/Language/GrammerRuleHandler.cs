@@ -30,9 +30,9 @@ namespace Language
 		public void HandleRule(int ruleId){
 			switch(ruleId){
 				case 8: treeNodeStack.Push(new LiteralTreeNode(input.LastReadElement));break;
-				case 6: treeNodeStack.Push(new MultiplyTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop()));
+				case 6: treeNodeStack.Push(new MultiplyTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop(),treeNodeStack.Pop()));
 						break;
-				case 4: treeNodeStack.Push(new AddTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop()));
+				case 4: treeNodeStack.Push(new AddTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop(),treeNodeStack.Pop()));
 						break;				
 				case 13: treeNodeStack.Push(new PrintTreeNode(treeNodeStack.Pop()));
 						break;
@@ -55,6 +55,10 @@ namespace Language
 				case 31: treeNodeStack.Push(new ParameterValueListTreeNode(null));break;
 				case 32: treeNodeStack.Push(new ParameterValuesListElementsTreeNode(null,treeNodeStack.Pop()));break;
 				case 33: treeNodeStack.Push(new ParameterValuesListElementsTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop()));break;
+				case 35: treeNodeStack.Push(new OperatorTreeNode(new Operator("+")));break;
+				case 36: treeNodeStack.Push(new OperatorTreeNode(new Operator("-")));break;
+				case 37: treeNodeStack.Push(new OperatorTreeNode(new Operator("*")));break;
+				case 38: treeNodeStack.Push(new OperatorTreeNode(new Operator("/")));break;
 			}
 		}
 		

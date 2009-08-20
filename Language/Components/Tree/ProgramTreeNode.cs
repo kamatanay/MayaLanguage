@@ -28,7 +28,8 @@ namespace Components
 		public ISymbol Execute(){
 			ISymbol lastSymbol = null;
 			expressions.Reverse();
-			foreach(object obj in expressions){
+			ArrayList expressionsClone = expressions.Clone() as ArrayList;
+			foreach(object obj in expressionsClone){
 				ITreeNode expression = obj as ITreeNode;
 				if (expression == null)
 					continue;

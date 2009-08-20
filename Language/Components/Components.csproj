@@ -79,6 +79,7 @@
     <Compile Include="Tree\ParameterListElementsTreeNode.cs" />
     <Compile Include="Tree\ParameterValueListTreeNode.cs" />
     <Compile Include="Tree\ParameterValuesListElementsTreeNode.cs" />
+    <Compile Include="Tree\OperatorTreeNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Symbols\" />

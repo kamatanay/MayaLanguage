@@ -22,6 +22,9 @@ namespace Components
 		
 		public ISymbol Execute(){
 			ISymbol conditionSymbolOutput = conditionTreeNode.Execute();
+			
+			if (conditionSymbolOutput.GetType().Equals(typeof(Identifier)))
+				conditionSymbolOutput = (ISymbol)ContextProvider.GetContext().GetValueOf(conditionSymbolOutput.Value().ToString());
 			int conditionOutput = (int)conditionSymbolOutput.Value();
 			if (conditionOutput>0)
 				return trueStatementTreeNode.Execute();

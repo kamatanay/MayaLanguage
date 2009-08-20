@@ -60,8 +60,10 @@ namespace Language
 					case '\r':	textPosition++;break;
 					case ',' :	inputs.Add(new Comma());textPosition++;break;
 					case '+' :	inputs.Add(new Operator("+"));textPosition++;break;
+					case '-' :	inputs.Add(new Operator("-"));textPosition++;break;
 					case '=' : 	inputs.Add(new Operator("="));textPosition++;break;
 					case '*' :	inputs.Add(new Operator("*"));textPosition++;break;
+					case '/' :	inputs.Add(new Operator("/"));textPosition++;break;
 					case ';' :	inputs.Add(new Semicolon());textPosition++;break;
 					case '(' :	inputs.Add(new OpenBracket());textPosition++;break;
 					case ')' :	inputs.Add(new CloseBracket());textPosition++;break;

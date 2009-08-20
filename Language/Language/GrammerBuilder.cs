@@ -21,7 +21,7 @@ namespace Language
 				
 			Rule e4 = new Rule(new NonTerminal("E")).
 				AddSymbol(new NonTerminal("E")).
-				AddSymbol(new Operator("+")).
+				AddSymbol(new NonTerminal("AddSubtractOperator")).
 				AddSymbol(new NonTerminal("T"));
 			
 			Rule e5 = new Rule(new NonTerminal("E")).
@@ -29,7 +29,7 @@ namespace Language
 			
 			Rule e6 = new Rule(new NonTerminal("T")).
 				AddSymbol(new NonTerminal("T")).
-				AddSymbol(new Operator("*")).
+				AddSymbol(new NonTerminal("MultiplyDivisionOperator")).
 				AddSymbol(new NonTerminal("F"));
 			
 			Rule e7 = new Rule(new NonTerminal("T")).
@@ -142,15 +142,20 @@ namespace Language
 				AddSymbol(new NonTerminal("SecondParameterListValueElements"));	
 			
 			Rule e34 = new Rule(new NonTerminal("ParameterListValueElements")).
-				AddSymbol(new NonTerminal("SecondParameterListValueElements"));				
+				AddSymbol(new NonTerminal("SecondParameterListValueElements"));
 			
 			
+			Rule e35 = new Rule(new NonTerminal("AddSubtractOperator")).
+				AddSymbol(new Operator("+"));
 			
+			Rule e36 = new Rule(new NonTerminal("AddSubtractOperator")).
+				AddSymbol(new Operator("-"));			
 			
+			Rule e37 = new Rule(new NonTerminal("MultiplyDivisionOperator")).
+				AddSymbol(new Operator("*"));
 			
-			
-			
-			
+			Rule e38 = new Rule(new NonTerminal("MultiplyDivisionOperator")).
+				AddSymbol(new Operator("/"));				
 			
 			
 			Grammer grammer = new Grammer().
@@ -187,7 +192,11 @@ namespace Language
 				AddRule(e31).
 				AddRule(e32).
 				AddRule(e33).
-				AddRule(e34);
+				AddRule(e34).
+				AddRule(e35).
+				AddRule(e36).
+				AddRule(e37).
+				AddRule(e38);
 			
 			return grammer;
 		}		

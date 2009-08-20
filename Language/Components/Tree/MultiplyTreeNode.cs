@@ -7,11 +7,13 @@ namespace Components
 	{
 		private ITreeNode leftTreeNode;
 		private ITreeNode rightTreeNode;
+		private ITreeNode operatorTreeNode;
 		
-		public MultiplyTreeNode(ITreeNode leftTreeNode, ITreeNode rightTreeNode)
+		public MultiplyTreeNode(ITreeNode rightTreeNode, ITreeNode operatorTreeNode, ITreeNode leftTreeNode)
 		{
 			this.leftTreeNode = leftTreeNode;
 			this.rightTreeNode = rightTreeNode;
+			this.operatorTreeNode = operatorTreeNode;
 		}
 		
 		public ISymbol Execute(){
@@ -23,7 +25,12 @@ namespace Components
 			    ySymbol = (ISymbol)ContextProvider.GetContext().GetValueOf(ySymbol.Value().ToString());			
 			int x = (int)xSymbol.Value();	
 			int y = (int)ySymbol.Value();
-			return new Literal(x*y);
+			int result = 0;
+			if (operatorTreeNode.Execute().ToString().Equals("*"))
+				result = x*y;
+			else
+				result = x/y;			
+			return new Literal(result);
 		}		
 	}
 }
