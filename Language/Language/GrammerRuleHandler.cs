@@ -47,6 +47,7 @@ namespace Language
 				case 15: treeNodeStack.Push(new AssignTreeNode(treeNodeStack.Pop(),treeNodeStack.Pop()));break;
 				case 9: treeNodeStack.Push(new VariableTreeNode(treeNodeStack.Pop()));break;
 				case 22: treeNodeStack.Push(new FunctionDefinitionTreeNode(treeNodeStack.Pop(),++functionsIdentified));break;
+				case 23: treeNodeStack.Push(new FunctionCallTreeNode(treeNodeStack.Pop()));break;
 			}
 		}
 		

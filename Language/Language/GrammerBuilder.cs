@@ -97,7 +97,15 @@ namespace Language
 				AddSymbol(new Keyword("end"));
 			
 			Rule e22 = new Rule(new NonTerminal("VariableValue")).
-				AddSymbol(new NonTerminal("FunctionDefinition"));			
+				AddSymbol(new NonTerminal("FunctionDefinition"));	
+			
+			Rule e23 = new Rule(new NonTerminal("FunctionCall")).
+			   	AddSymbol(new NonTerminal("Variable")).                 	
+			    AddSymbol(new OpenBracket()).
+				AddSymbol(new CloseBracket());
+			
+			Rule e24 = new Rule(new NonTerminal("F")).
+				AddSymbol(new NonTerminal("FunctionCall"));
 			
 			Grammer grammer = new Grammer().
 				AddRule(e1).
@@ -121,7 +129,9 @@ namespace Language
 				AddRule(e19).
 				AddRule(e20).
 				AddRule(e21).
-				AddRule(e22);
+				AddRule(e22).
+				AddRule(e23).
+				AddRule(e24);
 			
 			return grammer;
 		}		

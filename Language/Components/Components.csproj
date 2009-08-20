@@ -73,6 +73,7 @@
     <Compile Include="Symbols\Comma.cs" />
     <Compile Include="Symbols\FunctionIdentifier.cs" />
     <Compile Include="Tree\FunctionDefinitionTreeNode.cs" />
+    <Compile Include="Tree\FunctionCallTreeNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Symbols\" />

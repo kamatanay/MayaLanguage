@@ -21,7 +21,8 @@ namespace Components
 		}
 		
 		public object GetValueOf(string variableName){
-			foreach (object contextObject in this.contexts) {
+			for (int index=this.contexts.Count-1;index>=0;index--) {
+				object contextObject = this.contexts[index];
 				Dictionary<string,object> context = contextObject as Dictionary<string,object>;
 				if (context.ContainsKey(variableName))
 					return context[variableName];
@@ -30,7 +31,7 @@ namespace Components
 		}
 		
 		public void SetValueOf(string variableName,object valueObject){
-			((Dictionary<string,object>)contexts[0])[variableName] = valueObject;
+			((Dictionary<string,object>)contexts[contexts.Count-1])[variableName] = valueObject;
 		}
 		
 		public void CreateNewContext(){
@@ -39,7 +40,7 @@ namespace Components
 		
 		public void DeleteRecentContext(){
 			if (this.contexts.Count>1)
-				this.contexts.RemoveAt(0);
+				this.contexts.RemoveAt(this.contexts.Count-1);
 		}		
 	}
 }
