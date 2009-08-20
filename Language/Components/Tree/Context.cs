@@ -31,6 +31,15 @@ namespace Components
 		
 		public void SetValueOf(string variableName,object valueObject){
 			((Dictionary<string,object>)contexts[0])[variableName] = valueObject;
+		}
+		
+		public void CreateNewContext(){
+			this.contexts.Add(new Dictionary<string,object>());
+		}
+		
+		public void DeleteRecentContext(){
+			if (this.contexts.Count>1)
+				this.contexts.RemoveAt(0);
 		}		
 	}
 }

@@ -38,6 +38,7 @@ namespace Language
 			keywords.Add("else");
 			keywords.Add("end");
 			keywords.Add("var");
+			keywords.Add("function");
 		}
 		
 		public ISymbol Get(){

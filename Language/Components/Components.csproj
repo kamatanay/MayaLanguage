@@ -70,6 +70,9 @@
     <Compile Include="Tree\VariableTreeNode.cs" />
     <Compile Include="Tree\Context.cs" />
     <Compile Include="Tree\ContextProvider.cs" />
+    <Compile Include="Symbols\Comma.cs" />
+    <Compile Include="Symbols\FunctionIdentifier.cs" />
+    <Compile Include="Tree\FunctionDefinitionTreeNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Symbols\" />
