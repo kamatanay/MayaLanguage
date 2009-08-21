@@ -26,6 +26,9 @@ namespace Components
 				ContextProvider.GetContext().SetValueOf(variableName,functionTreeNode);
 				return symbol;
 			}
+			if (symbol.GetType().Equals(typeof(Identifier))){
+				symbol = (ISymbol)ContextProvider.GetContext().GetValueOf(symbol.Value().ToString());
+			}
 			ContextProvider.GetContext().SetValueOf(variableName,symbol);
 			return symbol;
 		}

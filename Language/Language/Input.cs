@@ -67,6 +67,15 @@ namespace Language
 					case ';' :	inputs.Add(new Semicolon());textPosition++;break;
 					case '(' :	inputs.Add(new OpenBracket());textPosition++;break;
 					case ')' :	inputs.Add(new CloseBracket());textPosition++;break;
+					case '"' : int currentPosition = textPosition++;
+								int length = 0;
+								while(program[textPosition] != '"'){
+									textPosition++;
+									length++;
+								}
+								string stringLiteral = program.Substring(currentPosition+1,length);
+								textPosition++;
+								inputs.Add(new Literal(stringLiteral));break;
 					default:	string subString = program.Substring(textPosition);
 								Regex regex = new Regex("^([a-zA-Z0-9]+)");
 								Match match = regex.Match(subString);
