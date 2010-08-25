@@ -3,7 +3,7 @@ using System;
 using Components;
 using System.Collections.Generic;
 
-namespace Language
+namespace MayaLanguage
 {
 	public class GrammerRuleHandler:IGrammerRuleHandler
 	{

@@ -4,7 +4,7 @@ using System.Collections;
 using Components;
 using System.Text.RegularExpressions;
 
-namespace Language
+namespace MayaLanguage
 {
 	public class Input:IInput
 	{

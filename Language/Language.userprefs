@@ -1,0 +1,22 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" ctype="Workspace" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Language/Main.cs" ctype="Workbench">
+    <Files>
+      <File FileName="Language/Main.cs" Line="5" Column="15" />
+      <File FileName="Language/Input.cs" Line="7" Column="15" />
+      <File FileName="Language/GrammerRuleHandler.cs" Line="6" Column="15" />
+      <File FileName="Language/GrammerBuilder.cs" Line="5" Column="15" />
+      <File FileName="Language/AssemblyInfo.cs" Line="7" Column="31" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="MayaLanguage" expanded="True" selected="True" />
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+</Properties>

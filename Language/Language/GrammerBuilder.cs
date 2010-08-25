@@ -2,7 +2,7 @@
 using System;
 using Components;
 
-namespace Language
+namespace MayaLanguage
 {
 	public class GrammerBuilder
 	{

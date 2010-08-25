@@ -2,14 +2,14 @@ using System;
 using Components;
 using System.IO;
 
-namespace Language
+namespace MayaLanguage
 {
 	class MainClass
 	{
 		public static void Main(string[] args)
 		{
 			if (args.Length == 0){
-				Console.WriteLine("Language: A simple language created by Anay Kamat (For learning purpose only).");
+				Console.WriteLine("Maya: A simple language created by Anay Narendra Kamat (For learning purpose only).");
 				Console.WriteLine("You need to specify a file path.");
 				Console.WriteLine();
 				return;
