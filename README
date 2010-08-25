@@ -1,0 +1,91 @@
+= Maya Language 1.0
+
+
+Maya is the simple functional programming language named after my sweetheart wife, Maya.
+
+
+== Usage
+
+First, you will need to compile the code. Open Language.sln using MonoDevelop 2.2 and build the project. This will create the executable file "Maya.exe" in "Language/bin/Debug" directory. To use the language, either put the Debug directory in your PATH or from Debug directory, execute following command:
+
+./Maya.exe <name_of_code_file>
+
+== Syntax
+
+The language is for learning purpose only and thus, does not have lot of features. In this section, we will look at syntax of functions supported by language till now.
+
+1. Print: To print an output on console, use "print" function. Example:
+print "Hello World!"; 	=> Hello World
+print 12;		=> 12
+number = 1004;		
+print number;		=> 1004
+
+2. Assignment: We can assign values to variables using '=' operator as shown above.
+
+3. Addition/Subtraction/Multiplication/Devision: This operations can be done using '+', '-', '*', '/' operators respectively. Example:
+print 2+2;		=> 4
+print 2*2;		=> 4
+print 2/2;		=> 1
+print 2-2;		=> 0
+
+4. Functions: Function are defined as follows:
+
+hello = function()
+		"Hello";
+	end
+
+print hello();		=> Hello
+
+add = 	function(number1, number2)
+		number1+number2;
+	end
+
+print add(10,2);	=> 12
+
+5. Recursion: Recursion is supported. Example:
+repeatHello = function(times)
+			if (times-1)
+				repeatHello(times-1);
+			end
+			print "Hello";
+		end
+
+repeatHello(5);
+=>	Hello
+	Hello
+	Hello
+	Hello
+	Hello
+
+This example also shows the use of if statement.
+
+6. Passing functions as function parameter: You can pass functions to other function as parameter. Example:
+repeat	= 	function(times, action)
+			if (times-1)
+				repeat(times-1,action);
+			end
+			action();
+		end
+
+hi	=	function()
+			print "Hi";
+		end
+
+repeat(2,hi);
+=>	Hi
+	Hi
+
+== What's Next?
+
+I will be adding few more features to it whenever I get some time.
+
+
+== License
+Copyright (c) 2009-2010 Anay Narendra Kamat - http://anaykamat.com
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>
+
